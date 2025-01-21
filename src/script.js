@@ -91,7 +91,7 @@ iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="c
     let forecastHtml = "";
 
     response.data.daily.forEach(function(day, index){
-if (index < 5) {
+if (index < 7) {
 
       forecastHtml = forecastHtml +
        `
