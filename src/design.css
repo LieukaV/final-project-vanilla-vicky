@@ -3,7 +3,7 @@
 
 body {
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBQ4_WvrJYkJnb1mNe1PZxxVeBOXqSrTUQTw&s);
-    font-family: "Roboto", sans-serif;
+    width: 100%;
   }
   
   a {
