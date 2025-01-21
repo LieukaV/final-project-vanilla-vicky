@@ -23,7 +23,7 @@ body {
   }
   
 .weather-app:hover{
-  opacity: 0;
+  opacity: 50%;
 }
 
   header {
