@@ -19,6 +19,8 @@ iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="c
     windElement.innerHTML = `${response.data.wind.speed}km/h`
     timeElement.innerHTML = formatDate(date);
     temperatureElement.innerHTML = temperature;
+
+    receiveForecast(response.data.city);
   }
 
 
@@ -77,31 +79,49 @@ iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="c
 
 
   
-  function forecastDisplay() {
+  function forecastDisplay(response) {
+
+
+
+
 
     let forecastElement = document.querySelector("#forecast");
 
-    let days = ["Mon","Tue","Wed","Thu","Fri"];
+    
     let forecastHtml = "";
 
-    days.forEach(function(day){
+    response.data.daily.days.forEach(function(day , index){
+if (index < 5) {
+
       forecastHtml = forecastHtml +
        `
       <div class="forecast-day-weather">
-                     <div class="forecast-date-weather">${day}</div>
-                     <div class="forecast-icon-weather">☀️</div>
+                     <div class="forecast-date-weather">${formateDay(day.time)}</div>
+                     <img src="${day.condition.icon_url}"   class="forecast-icon-weather"/> 
                      <div class="forecast-temperatures-weather">
-                       <div class="temperature-forecast-class"><strong >20°</strong></div>
-                       <div class="temperature-forecast-class">10°</div>
+                       <div class="temperature-forecast-class"><strong >${Math.round(day.temperature.maximum)}°</strong></div>
+                       <div class="temperature-forecast-class">${Math.round(day.temperature.minimum)}°</div>
                    </div>
                    </div>`;
+}
     });
       forecastElement.innerHTML = forecastHtml;
+  
   }
+
+  function formateDay(timestamp){
+    let date = new Date(timestamp * 1000);
+    let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
+    return days[date.getDay()];
+  }
+
+
 
  function receiveForecast(city) {
   let apiKey = "79a2etb100ec8d0o4359f0b1e87486a0";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(forecastDisplay);
   console.log(apiUrl);
  }
 
@@ -114,6 +134,6 @@ iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="c
   let currentDate = new Date();
   
   currentDateELement.innerHTML = formatDate(currentDate);
-  receiveForecast("Paris");
-  forecastDisplay();
+ 
+  
  
