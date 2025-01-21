@@ -14,7 +14,7 @@ body {
   
   .weather-app {
     background-color: rgb(148, 170, 207);
-    transition: ease-in-out 0.5s;
+    transition: rgb(239, 162, 175);
     max-width: 600px;
     margin: 60px auto;
     padding: 30px;
